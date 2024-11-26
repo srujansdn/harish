@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: patient-service-deployment
+  labels:
+    app: patient-service
+spec:
+  replicas: 3  # The number of pods you want to run
+  selector:
+    matchLabels:
+      app: patient-service
+  template:
+    metadata:
+      labels:
+        app: patient-service
+    spec:
+      containers:
+      - name: patient-service
+        image: <your-docker-image>  # Replace with your Docker image name
+        imagePullPolicy: Always  # Pull the latest image each time
+        ports:
+        - containerPort: 3000  # Port the app is listening on inside the container
+        env:
+          - name: NODE_ENV
+            value: "production"  # Set the environment variable (optional)
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
