@@ -1,7 +1,7 @@
 
 FROM node:14-slim
 
-r
+
 WORKDIR /app
 
 
